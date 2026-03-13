@@ -1,0 +1,110 @@
+name: srl-eos-evpn
+
+topology:
+  kinds:
+    arista_ceos:
+      env:
+        INTFTYPE: et
+  nodes:
+    srl1:
+      kind: nokia_srlinux
+      image: ghcr.io/nokia/srlinux:25.10.2
+      type: ixr-d2l
+      startup-config: startup/srl1.partial.txt
+    srl2:
+      kind: nokia_srlinux
+      image: ghcr.io/nokia/srlinux:25.10.2
+      type: ixr-d2l
+      startup-config: startup/srl2.partial.txt
+    eos3:
+      kind: arista_ceos
+      image: ceos:4.35.2F
+      startup-config: startup/eos3.txt
+    eos4:
+      kind: arista_ceos
+      image: ceos:4.35.2F
+      startup-config: startup/eos4.txt
+    host1-1:
+      kind: linux
+      image: ghcr.io/srl-labs/network-multitool:v0.5.0
+      exec:
+        - ip addr add 192.168.1.1/24 dev eth1
+        - ip route add 192.168.0.0/16 via 192.168.1.254 dev eth1
+      binds:
+        - scripts/ping_hosts.sh:/usr/local/bin/ping_hosts.sh:ro
+    host2-2:
+      kind: linux
+      image: ghcr.io/srl-labs/network-multitool:v0.5.0
+      exec:
+        - ip addr add 192.168.2.2/24 dev eth1
+        - ip route add 192.168.0.0/16 via 192.168.2.254 dev eth1
+      binds:
+        - scripts/ping_hosts.sh:/usr/local/bin/ping_hosts.sh:ro
+    spine:
+      kind: nokia_srlinux
+      image: ghcr.io/nokia/srlinux:25.10.2
+      type: ixr-d2l
+      startup-config: startup/spine.partial.txt
+    host2-4:
+      kind: linux
+      image: ghcr.io/srl-labs/network-multitool:v0.5.0
+      exec:
+        - ip addr add 192.168.2.4/24 dev eth1
+        - ip route add 192.168.0.0/16 via 192.168.2.254 dev eth1
+      binds:
+        - scripts/ping_hosts.sh:/usr/local/bin/ping_hosts.sh:ro
+    host1-4:
+      kind: linux
+      image: ghcr.io/srl-labs/network-multitool:v0.5.0
+      exec:
+        - ip addr add 192.168.1.4/24 dev eth1
+        - ip route add 192.168.0.0/16 via 192.168.1.254 dev eth1
+      binds:
+        - scripts/ping_hosts.sh:/usr/local/bin/ping_hosts.sh:ro
+    host2-3:
+      kind: linux
+      image: ghcr.io/srl-labs/network-multitool:v0.5.0
+      exec:
+        - ip addr add 192.168.2.3/24 dev eth1
+        - ip route add 192.168.0.0/16 via 192.168.2.254 dev eth1
+      binds:
+        - scripts/ping_hosts.sh:/usr/local/bin/ping_hosts.sh:ro
+    host1-3:
+      kind: linux
+      image: ghcr.io/srl-labs/network-multitool:v0.5.0
+      exec:
+        - ip addr add 192.168.1.3/24 dev eth1
+        - ip route add 192.168.0.0/16 via 192.168.1.254 dev eth1
+      binds:
+        - scripts/ping_hosts.sh:/usr/local/bin/ping_hosts.sh:ro
+    host2-1:
+      kind: linux
+      image: ghcr.io/srl-labs/network-multitool:v0.5.0
+      exec:
+        - ip addr add 192.168.2.1/24 dev eth1
+        - ip route add 192.168.0.0/16 via 192.168.2.254 dev eth1
+      binds:
+        - scripts/ping_hosts.sh:/usr/local/bin/ping_hosts.sh:ro
+    host1-2:
+      kind: linux
+      image: ghcr.io/srl-labs/network-multitool:v0.5.0
+      exec:
+        - ip addr add 192.168.1.2/24 dev eth1
+        - ip route add 192.168.0.0/16 via 192.168.1.254 dev eth1
+      binds:
+        - scripts/ping_hosts.sh:/usr/local/bin/ping_hosts.sh:ro
+
+  links:
+    # inter-switch link
+    - endpoints: [ "spine:e1-1", "srl1:e1-1" ]
+    - endpoints: [ "spine:e1-2", "srl2:e1-1" ]
+    - endpoints: [ "spine:e1-3", "eos3:et1" ]
+    - endpoints: [ "spine:e1-4", "eos4:et1" ]
+    - endpoints: [ "srl1:e1-2", "host1-1:eth1" ]
+    - endpoints: [ "srl1:e1-3", "host2-1:eth1" ]
+    - endpoints: [ "srl2:e1-2", "host1-2:eth1" ]
+    - endpoints: [ "srl2:e1-3", "host2-2:eth1" ]
+    - endpoints: [ "eos3:et2", "host1-3:eth1" ]
+    - endpoints: [ "eos3:et3", "host2-3:eth1" ]
+    - endpoints: [ "eos4:et2", "host1-4:eth1" ]
+    - endpoints: [ "eos4:et3", "host2-4:eth1" ]

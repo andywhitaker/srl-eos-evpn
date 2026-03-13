@@ -1,0 +1,111 @@
+! Command: show running-config
+! device: eos4 (cEOSLab, EOS-4.35.2F-46221466.4352F (engineering build))
+!
+no aaa root
+!
+username admin privilege 15 role network-admin secret sha512 $6$6GC/dgddG6EozNry$Rht4B6XlU4MbJmXQ/8k1/BrO0NMnPqWhWHZbeD4oQyRypui1/nvOnXoA5CNfgF/RtQQCVK3ofdpF.wIyyPjpY1
+!
+management api http-commands
+   no shutdown
+!
+no service interface inactive port-id allocation disabled
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname eos4
+!
+spanning-tree mode mstp
+!
+system l1
+   unsupported speed action error
+   unsupported error-correction action error
+!
+vlan 2
+!
+vrf instance tenant1
+!
+management api gnmi
+   transport grpc default
+!
+management api netconf
+   transport ssh default
+!
+interface Ethernet1
+   description "interSwitch link to spine1"
+   no switchport
+   ip address 10.4.10.1/31
+!
+interface Ethernet2
+   description "edge link to host4-1"
+!
+interface Ethernet3
+   description "edge link to host4-2"
+   switchport access vlan 2
+!
+interface Loopback0
+   ip address 10.0.0.4/32
+!
+interface Management0
+   ip address 172.20.20.13/24
+   ipv6 address 3fff:172:20:20::d/64
+!
+interface Vlan1
+   description tenant1-bd1-irb
+   vrf tenant1
+   ip address virtual 192.168.1.254/24
+!
+interface Vlan2
+   description tenant1-bd2-irb
+   vrf tenant1
+   ip address virtual 192.168.2.254/24
+!
+interface Vxlan1
+   vxlan source-interface Loopback0
+   vxlan udp-port 4789
+   vxlan vlan 1 vni 10001
+   vxlan vlan 2 vni 10002
+   vxlan vrf tenant1 vni 10000
+!
+ip virtual-router mac-address aa:aa:aa:aa:aa:aa
+!
+ip routing
+ip routing vrf tenant1
+!
+ip route 0.0.0.0/0 172.20.20.1
+!
+ipv6 route ::/0 3fff:172:20:20::1
+!
+router bgp 4
+   router-id 10.0.0.4
+   no bgp default ipv4-unicast
+   neighbor 10.4.10.0 remote-as 10
+   neighbor 10.4.10.0 send-community
+   !
+   vlan 1
+      rd 10.0.0.4:10001
+      route-target import 1:10001
+      route-target export 1:10001
+      redistribute learned
+   !
+   vlan 2
+      rd 10.0.0.4:10002
+      route-target import 1:10002
+      route-target export 1:10002
+      redistribute learned
+   !
+   address-family evpn
+      neighbor 10.4.10.0 activate
+   !
+   address-family ipv4
+      neighbor 10.4.10.0 activate
+      network 10.0.0.4/32
+   !
+   vrf tenant1
+      rd 10.0.0.4:10000
+      route-target import evpn 1:10000
+      route-target export evpn 1:10000
+      redistribute connected
+!
+end
