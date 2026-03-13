@@ -3,7 +3,7 @@
 ## SR Linux and EOS EVPN Lab
 This lab demonstrates interoperability of Nokia SR Linux and EOS devices. The lab contains two mac-vrfs within the same ip-vrf and demonstrates connectivity between the hosts.
 
-> [!NOTE] Images
+> [!NOTE]
 > This lab has been tested with SR Linux version 25.10.2 and EOS version 4.35.2F. Using other images may be possible with modifications to the topology file, but results are not guaranteed.
 > 
 > SR Linux images will be downloaded automatically upon the first run of the lab. ***Due to licensing constraints EOS images must be obtained and imported into docker manually***. This process is [documented here](https://containerlab.dev/manual/kinds/ceos/#getting-arista-ceos-image). 
