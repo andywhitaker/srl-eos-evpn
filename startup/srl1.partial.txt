@@ -81,8 +81,6 @@ set / network-instance default protocols bgp neighbor 10.1.10.0 peer-group bgpgr
 set / network-instance default protocols bgp neighbor 10.1.10.0 afi-safi evpn admin-state enable
 set / network-instance default protocols bgp neighbor 10.1.10.0 afi-safi ipv4-unicast admin-state enable
 set / network-instance default protocols bgp neighbor 10.1.10.0 afi-safi ipv6-unicast admin-state disable
-set / network-instance default protocols bgp neighbor 10.1.10.0 local-as as-number 1
-set / network-instance default protocols bgp neighbor 10.1.10.0 transport local-address 10.1.10.1
 set / network-instance mgmt type ip-vrf
 set / network-instance mgmt admin-state enable
 set / network-instance mgmt description "Management network instance"

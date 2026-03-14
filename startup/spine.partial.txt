@@ -66,32 +66,24 @@ set / network-instance default protocols bgp neighbor 10.1.10.1 peer-group bgpgr
 set / network-instance default protocols bgp neighbor 10.1.10.1 afi-safi evpn admin-state enable
 set / network-instance default protocols bgp neighbor 10.1.10.1 afi-safi ipv4-unicast admin-state enable
 set / network-instance default protocols bgp neighbor 10.1.10.1 afi-safi ipv6-unicast admin-state disable
-set / network-instance default protocols bgp neighbor 10.1.10.1 local-as as-number 10
-set / network-instance default protocols bgp neighbor 10.1.10.1 transport local-address 10.1.10.0
 set / network-instance default protocols bgp neighbor 10.2.10.1 admin-state enable
 set / network-instance default protocols bgp neighbor 10.2.10.1 peer-as 2
 set / network-instance default protocols bgp neighbor 10.2.10.1 peer-group bgpgroup-ebgp-myfabric
 set / network-instance default protocols bgp neighbor 10.2.10.1 afi-safi evpn admin-state enable
 set / network-instance default protocols bgp neighbor 10.2.10.1 afi-safi ipv4-unicast admin-state enable
 set / network-instance default protocols bgp neighbor 10.2.10.1 afi-safi ipv6-unicast admin-state disable
-set / network-instance default protocols bgp neighbor 10.2.10.1 local-as as-number 10
-set / network-instance default protocols bgp neighbor 10.2.10.1 transport local-address 10.2.10.0
 set / network-instance default protocols bgp neighbor 10.3.10.1 admin-state enable
 set / network-instance default protocols bgp neighbor 10.3.10.1 peer-as 3
 set / network-instance default protocols bgp neighbor 10.3.10.1 peer-group bgpgroup-ebgp-myfabric
 set / network-instance default protocols bgp neighbor 10.3.10.1 afi-safi evpn admin-state enable
 set / network-instance default protocols bgp neighbor 10.3.10.1 afi-safi ipv4-unicast admin-state enable
 set / network-instance default protocols bgp neighbor 10.3.10.1 afi-safi ipv6-unicast admin-state disable
-set / network-instance default protocols bgp neighbor 10.3.10.1 local-as as-number 10
-set / network-instance default protocols bgp neighbor 10.3.10.1 transport local-address 10.3.10.0
 set / network-instance default protocols bgp neighbor 10.4.10.1 admin-state enable
 set / network-instance default protocols bgp neighbor 10.4.10.1 peer-as 4
 set / network-instance default protocols bgp neighbor 10.4.10.1 peer-group bgpgroup-ebgp-myfabric
 set / network-instance default protocols bgp neighbor 10.4.10.1 afi-safi evpn admin-state enable
 set / network-instance default protocols bgp neighbor 10.4.10.1 afi-safi ipv4-unicast admin-state enable
 set / network-instance default protocols bgp neighbor 10.4.10.1 afi-safi ipv6-unicast admin-state disable
-set / network-instance default protocols bgp neighbor 10.4.10.1 local-as as-number 10
-set / network-instance default protocols bgp neighbor 10.4.10.1 transport local-address 10.4.10.0
 set / network-instance mgmt type ip-vrf
 set / network-instance mgmt admin-state enable
 set / network-instance mgmt description "Management network instance"
