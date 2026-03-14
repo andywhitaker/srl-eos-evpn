@@ -5,8 +5,8 @@ This lab demonstrates interoperability of Nokia SR Linux and EOS devices. The la
 
 > [!NOTE]
 > This lab has been tested with SR Linux version 25.10.2 and EOS version 4.35.2F. Using other images may be possible with modifications to the topology file, but results are not guaranteed.
-> 
-> SR Linux images will be downloaded automatically upon the first run of the lab. ***Due to licensing constraints EOS images must be obtained and imported into docker manually***. This process is [documented here](https://containerlab.dev/manual/kinds/ceos/#getting-arista-ceos-image). 
+>
+> SR Linux images will be downloaded automatically upon the first run of the lab. ***Due to licensing constraints EOS images must be obtained and imported into docker manually***. This process is [documented here](https://containerlab.dev/manual/kinds/ceos/#getting-arista-ceos-image).
 
 
 ## Lab Topology
@@ -16,48 +16,48 @@ This lab demonstrates interoperability of Nokia SR Linux and EOS devices. The la
 
 ### Deployment
 ```
-╭───────────────────────────┬───────────────────────────────────────────┬─────────┬───────────────────╮
-│            Name           │                 Kind/Image                │  State  │   IPv4/6 Address  │
-├───────────────────────────┼───────────────────────────────────────────┼─────────┼───────────────────┤
-│ clab-srl-eos-evpn-eos3    │ arista_ceos                               │ running │ 172.20.20.13      │
-│                           │ ceos:4.35.2F                              │         │ 3fff:172:20:20::d │
-├───────────────────────────┼───────────────────────────────────────────┼─────────┼───────────────────┤
-│ clab-srl-eos-evpn-eos4    │ arista_ceos                               │ running │ 172.20.20.14      │
-│                           │ ceos:4.35.2F                              │         │ 3fff:172:20:20::e │
-├───────────────────────────┼───────────────────────────────────────────┼─────────┼───────────────────┤
-│ clab-srl-eos-evpn-host1-1 │ linux                                     │ running │ 172.20.20.6       │
-│                           │ ghcr.io/srl-labs/network-multitool:v0.5.0 │         │ 3fff:172:20:20::6 │
-├───────────────────────────┼───────────────────────────────────────────┼─────────┼───────────────────┤
-│ clab-srl-eos-evpn-host1-2 │ linux                                     │ running │ 172.20.20.2       │
-│                           │ ghcr.io/srl-labs/network-multitool:v0.5.0 │         │ 3fff:172:20:20::2 │
-├───────────────────────────┼───────────────────────────────────────────┼─────────┼───────────────────┤
-│ clab-srl-eos-evpn-host1-3 │ linux                                     │ running │ 172.20.20.3       │
-│                           │ ghcr.io/srl-labs/network-multitool:v0.5.0 │         │ 3fff:172:20:20::3 │
-├───────────────────────────┼───────────────────────────────────────────┼─────────┼───────────────────┤
-│ clab-srl-eos-evpn-host1-4 │ linux                                     │ running │ 172.20.20.4       │
-│                           │ ghcr.io/srl-labs/network-multitool:v0.5.0 │         │ 3fff:172:20:20::4 │
-├───────────────────────────┼───────────────────────────────────────────┼─────────┼───────────────────┤
-│ clab-srl-eos-evpn-host2-1 │ linux                                     │ running │ 172.20.20.9       │
-│                           │ ghcr.io/srl-labs/network-multitool:v0.5.0 │         │ 3fff:172:20:20::9 │
-├───────────────────────────┼───────────────────────────────────────────┼─────────┼───────────────────┤
-│ clab-srl-eos-evpn-host2-2 │ linux                                     │ running │ 172.20.20.5       │
-│                           │ ghcr.io/srl-labs/network-multitool:v0.5.0 │         │ 3fff:172:20:20::5 │
-├───────────────────────────┼───────────────────────────────────────────┼─────────┼───────────────────┤
-│ clab-srl-eos-evpn-host2-3 │ linux                                     │ running │ 172.20.20.8       │
-│                           │ ghcr.io/srl-labs/network-multitool:v0.5.0 │         │ 3fff:172:20:20::8 │
-├───────────────────────────┼───────────────────────────────────────────┼─────────┼───────────────────┤
-│ clab-srl-eos-evpn-host2-4 │ linux                                     │ running │ 172.20.20.10      │
-│                           │ ghcr.io/srl-labs/network-multitool:v0.5.0 │         │ 3fff:172:20:20::a │
-├───────────────────────────┼───────────────────────────────────────────┼─────────┼───────────────────┤
-│ clab-srl-eos-evpn-spine   │ nokia_srlinux                             │ running │ 172.20.20.12      │
-│                           │ ghcr.io/nokia/srlinux:25.10.2             │         │ 3fff:172:20:20::c │
-├───────────────────────────┼───────────────────────────────────────────┼─────────┼───────────────────┤
-│ clab-srl-eos-evpn-srl1    │ nokia_srlinux                             │ running │ 172.20.20.11      │
-│                           │ ghcr.io/nokia/srlinux:25.10.2             │         │ 3fff:172:20:20::b │
-├───────────────────────────┼───────────────────────────────────────────┼─────────┼───────────────────┤
-│ clab-srl-eos-evpn-srl2    │ nokia_srlinux                             │ running │ 172.20.20.7       │
-│                           │ ghcr.io/nokia/srlinux:25.10.2             │         │ 3fff:172:20:20::7 │
-╰───────────────────────────┴───────────────────────────────────────────┴─────────┴───────────────────╯
+╭─────────┬───────────────────────────────────────────┬─────────┬───────────────────╮
+│   Name  │                 Kind/Image                │  State  │   IPv4/6 Address  │
+├─────────┼───────────────────────────────────────────┼─────────┼───────────────────┤
+│ eos3    │ arista_ceos                               │ running │ 172.20.20.14      │
+│         │ ceos:4.35.2F                              │         │ 3fff:172:20:20::e │
+├─────────┼───────────────────────────────────────────┼─────────┼───────────────────┤
+│ eos4    │ arista_ceos                               │ running │ 172.20.20.13      │
+│         │ ceos:4.35.2F                              │         │ 3fff:172:20:20::d │
+├─────────┼───────────────────────────────────────────┼─────────┼───────────────────┤
+│ host1-1 │ linux                                     │ running │ 172.20.20.10      │
+│         │ ghcr.io/srl-labs/network-multitool:v0.5.0 │         │ 3fff:172:20:20::a │
+├─────────┼───────────────────────────────────────────┼─────────┼───────────────────┤
+│ host1-2 │ linux                                     │ running │ 172.20.20.5       │
+│         │ ghcr.io/srl-labs/network-multitool:v0.5.0 │         │ 3fff:172:20:20::5 │
+├─────────┼───────────────────────────────────────────┼─────────┼───────────────────┤
+│ host1-3 │ linux                                     │ running │ 172.20.20.8       │
+│         │ ghcr.io/srl-labs/network-multitool:v0.5.0 │         │ 3fff:172:20:20::8 │
+├─────────┼───────────────────────────────────────────┼─────────┼───────────────────┤
+│ host1-4 │ linux                                     │ running │ 172.20.20.9       │
+│         │ ghcr.io/srl-labs/network-multitool:v0.5.0 │         │ 3fff:172:20:20::9 │
+├─────────┼───────────────────────────────────────────┼─────────┼───────────────────┤
+│ host2-1 │ linux                                     │ running │ 172.20.20.11      │
+│         │ ghcr.io/srl-labs/network-multitool:v0.5.0 │         │ 3fff:172:20:20::b │
+├─────────┼───────────────────────────────────────────┼─────────┼───────────────────┤
+│ host2-2 │ linux                                     │ running │ 172.20.20.6       │
+│         │ ghcr.io/srl-labs/network-multitool:v0.5.0 │         │ 3fff:172:20:20::6 │
+├─────────┼───────────────────────────────────────────┼─────────┼───────────────────┤
+│ host2-3 │ linux                                     │ running │ 172.20.20.4       │
+│         │ ghcr.io/srl-labs/network-multitool:v0.5.0 │         │ 3fff:172:20:20::4 │
+├─────────┼───────────────────────────────────────────┼─────────┼───────────────────┤
+│ host2-4 │ linux                                     │ running │ 172.20.20.12      │
+│         │ ghcr.io/srl-labs/network-multitool:v0.5.0 │         │ 3fff:172:20:20::c │
+├─────────┼───────────────────────────────────────────┼─────────┼───────────────────┤
+│ spine   │ nokia_srlinux                             │ running │ 172.20.20.7       │
+│         │ ghcr.io/nokia/srlinux:25.10.2             │         │ 3fff:172:20:20::7 │
+├─────────┼───────────────────────────────────────────┼─────────┼───────────────────┤
+│ srl1    │ nokia_srlinux                             │ running │ 172.20.20.2       │
+│         │ ghcr.io/nokia/srlinux:25.10.2             │         │ 3fff:172:20:20::2 │
+├─────────┼───────────────────────────────────────────┼─────────┼───────────────────┤
+│ srl2    │ nokia_srlinux                             │ running │ 172.20.20.3       │
+│         │ ghcr.io/nokia/srlinux:25.10.2             │         │ 3fff:172:20:20::3 │
+╰─────────┴───────────────────────────────────────────┴─────────┴───────────────────╯
 ```
 
 ## Hosts
@@ -85,22 +85,22 @@ EOS Switch 4:
 ### Hosts
 
 #### Pinging Between Hosts
-Each host has a script mounted called `ping_hosts.sh` which, when executed, will ping all host IP addresses.
+Each host has a script mounted called `ping_hosts` which, when executed, will ping all host IP addresses.
 
 To log into one of the hosts use the `docker exec` command:
 ``` sh
-docker exec -it clab-srl-eos-evpn-host1-1 sh
+docker exec -it host1-1 sh
 ```
 
 
-One logged in you can run the `ping_hosts.sh` command:
+One logged in you can run the `ping_hosts` command:
 ``` sh
-ping_hosts.sh
+ping_hosts
 ```
 
 Example output:
 ```
-/ # ping_hosts.sh
+/ # ping_hosts
 PING 192.168.1.1 (192.168.1.1) 56(84) bytes of data.
 64 bytes from 192.168.1.1: icmp_seq=1 ttl=64 time=0.071 ms
 64 bytes from 192.168.1.1: icmp_seq=2 ttl=64 time=0.052 ms
@@ -176,10 +176,10 @@ ip neigh
 Example output:
 ```
 / # ip neigh
-192.168.1.254 dev eth1 lladdr aa:aa:aa:aa:aa:aa STALE 
-192.168.1.4 dev eth1 lladdr aa:c1:ab:98:41:28 DELAY 
-192.168.1.3 dev eth1 lladdr aa:c1:ab:dd:98:3b DELAY 
-192.168.1.2 dev eth1 lladdr aa:c1:ab:fc:7a:78 DELAY 
+192.168.1.254 dev eth1 lladdr aa:aa:aa:aa:aa:aa STALE
+192.168.1.4 dev eth1 lladdr aa:c1:ab:98:41:28 DELAY
+192.168.1.3 dev eth1 lladdr aa:c1:ab:dd:98:3b DELAY
+192.168.1.2 dev eth1 lladdr aa:c1:ab:fc:7a:78 DELAY
 ```
 
 ### SRL Devices
