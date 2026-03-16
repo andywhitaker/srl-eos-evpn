@@ -12,7 +12,11 @@ This lab demonstrates interoperability of Nokia SR Linux and EOS devices. The la
 ## Lab Topology
 
 ### Diagram
+#### Topology
 ![topology](srl-eos-evpn.png)
+
+#### Bridge Domains
+![bridge domains](srl-eos-evpn-bridge-domains.png)
 
 ### Deployment
 ```
